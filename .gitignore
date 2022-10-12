@@ -5,7 +5,7 @@
 .packages
 build/
 .idea
-.metadata
+
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
