@@ -13,3 +13,12 @@ class FinishMatch extends MatchEvent {
   List<Object?> get props => throw UnimplementedError();
 }
 
+class TimerChanged extends MatchEvent {
+
+  final int seconds;
+
+  TimerChanged({required this.seconds});
+
+  @override
+  List<Object?> get props => [seconds];
+}
