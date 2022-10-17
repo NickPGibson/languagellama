@@ -12,6 +12,8 @@ import 'package:languagellama/widgets/llama_game_widget.dart';
 import 'package:languagellama/widgets/panel.dart';
 import 'package:collection/collection.dart';
 
+import 'match_tile.dart';
+
 class MatchUi extends StatelessWidget {
   const MatchUi({Key? key}) : super(key: key);
 
@@ -26,7 +28,10 @@ class MatchUi extends StatelessWidget {
               if (state is MatchInProgress) {
                 return Column(
                   children: [
-                    const GameState(),
+                    GameState(
+                      secondsRemaining: state.secondsRemaining,
+                      score: state.score
+                    ),
                     Expanded(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
@@ -41,6 +46,8 @@ class MatchUi extends StatelessWidget {
                                 children: [
                                   Column(
                                     children: state.nativeWords.mapIndexed((index, e) => Panel(
+                                      color: e.state == MatchTileState.selected ? Colors.green : Colors.white,
+                                      onTap: () => BlocProvider.of<MatchBloc>(context).add(NativeWordTapped(index: index)),
                                       visible: e.text != null,
                                       width: smallestSide,
                                       height: smallestSide,
@@ -50,6 +57,8 @@ class MatchUi extends StatelessWidget {
                                   ),
                                   Column(
                                     children: state.targetWords.mapIndexed((index, e) => Panel(
+                                      color: e.state == MatchTileState.selected ? Colors.green : Colors.white,
+                                      onTap: () => BlocProvider.of<MatchBloc>(context).add(TargetWordTapped(index: index)),
                                       visible: e.text != null,
                                       width: smallestSide,
                                       height: smallestSide,
@@ -67,6 +76,8 @@ class MatchUi extends StatelessWidget {
                     IconButton(onPressed: () {}, icon: const Icon(Icons.pause, size: 50,),)
                   ],
                 );
+              } else if (state is MatchFinished) {
+                return Center(child: Text("Game over. Score: ${state.score}"),);
               } else {
                 return const SizedBox.shrink();
               }

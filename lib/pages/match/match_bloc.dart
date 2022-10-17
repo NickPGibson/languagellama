@@ -16,6 +16,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
 
   static const _gameLength = 60;
   var _secondsRemaining = _gameLength;
+  var _score = 0;
 
   final Repository _repository;
 
@@ -36,6 +37,10 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
       if (event is StartMatch) {
 
         final initialWords = _repository.getLanguagePairs(4);
+        initialWords.forEach((key, value) {
+          _answers.add(key, value);
+        });
+
         _nativeWords.setAll(0, initialWords.keys);
         _targetWords..setAll(0, initialWords.values)..shuffle();
 
@@ -47,17 +52,40 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
 
       if (event is TimerChanged) {
         if (event.seconds == 0) {
-          // finish game
+          emit(MatchFinished(score: _score));
         } else {
           _secondsRemaining = event.seconds;
           emit(_matchState);
         }
       }
+
+      if (event is NativeWordTapped) {
+        _selectedNativeIndex = event.index;
+        emit(_matchState);
+      }
+
+      if (event is TargetWordTapped) {
+        _selectedTargetIndex = event.index;
+        emit(_matchState);
+      }
     }, transformer: sequential());
   }
 
   MatchState get _matchState {
+
+    if (_selectedNativeIndex != null && _selectedTargetIndex != null) {
+
+
+      if (_answers.contains(_nativeWords[_selectedNativeIndex!], _targetWords[_selectedTargetIndex!])) {
+        ++_score;
+      }
+
+      _selectedNativeIndex = null;
+      _selectedTargetIndex = null;
+    }
+
     return MatchInProgress(
+      score: _score,
       secondsRemaining: _secondsRemaining,
       nativeWords: _nativeWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedNativeIndex ?  MatchTileState.selected : MatchTileState.normal)).toList(),
       targetWords: _targetWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedTargetIndex ?  MatchTileState.selected : MatchTileState.normal)).toList()

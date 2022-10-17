@@ -22,3 +22,23 @@ class TimerChanged extends MatchEvent {
   @override
   List<Object?> get props => [seconds];
 }
+
+class NativeWordTapped extends MatchEvent {
+
+  final int index;
+
+  NativeWordTapped({required this.index});
+
+  @override
+  List<Object?> get props => [index];
+}
+
+class TargetWordTapped extends MatchEvent {
+
+  final int index;
+
+  TargetWordTapped({required this.index});
+
+  @override
+  List<Object?> get props => [index];
+}
