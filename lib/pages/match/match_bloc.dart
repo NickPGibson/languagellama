@@ -36,13 +36,15 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     on<MatchEvent>((event, emit) {
       if (event is StartMatch) {
 
-        final initialWords = _repository.getLanguagePairs(4);
-        initialWords.forEach((key, value) {
+        _repository.getLanguagePairs().forEach((key, value) {
           _answers.add(key, value);
         });
 
-        _nativeWords.setAll(0, initialWords.keys);
-        _targetWords..setAll(0, initialWords.values)..shuffle();
+        final initialNativeWords = _answers.keys.sample(4);
+        final initialTargetWords = initialNativeWords.map((e) => _answers[e].sample(1).single).toList()..shuffle();
+
+        _nativeWords.setAll(0, initialNativeWords);
+        _targetWords.setAll(0, initialTargetWords);
 
         _timerSubscription?.cancel();
         _timerSubscription = _timer
@@ -54,6 +56,9 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
         if (event.seconds == 0) {
           emit(MatchFinished(score: _score));
         } else {
+          if (event.seconds % 2 == 0) {
+            _getNextPair(1);
+          }
           _secondsRemaining = event.seconds;
           emit(_matchState);
         }
@@ -74,10 +79,13 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
   MatchState get _matchState {
 
     if (_selectedNativeIndex != null && _selectedTargetIndex != null) {
-
-
       if (_answers.contains(_nativeWords[_selectedNativeIndex!], _targetWords[_selectedTargetIndex!])) {
         ++_score;
+
+        _nativeWords[_selectedNativeIndex!] = null;
+        _targetWords[_selectedTargetIndex!] = null;
+
+        //_getNextPair(3);
       }
 
       _selectedNativeIndex = null;
@@ -90,6 +98,34 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
       nativeWords: _nativeWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedNativeIndex ?  MatchTileState.selected : MatchTileState.normal)).toList(),
       targetWords: _targetWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedTargetIndex ?  MatchTileState.selected : MatchTileState.normal)).toList()
     );
+  }
+
+  void _getNextPair(int minimumEmptySpots) {
+    final emptyNativeSpots = <int?>[];
+    _nativeWords.forEachIndexed((index, element) {
+      if (element == null) {
+        emptyNativeSpots.add(index);
+      }
+    });
+
+    if (emptyNativeSpots.length >= minimumEmptySpots) {
+      final nextNativeWord = _answers.keys.sample(1);
+      final nextTargetWord = nextNativeWord.map((e) => _answers[e].sample(1).single).toList()..shuffle();
+
+      final nextNativeSpotIndex = emptyNativeSpots.sample(1).first!;
+      _nativeWords[nextNativeSpotIndex] = nextNativeWord.first;
+
+      final emptyTargetSpots = <int?>[];
+      _targetWords.forEachIndexed((index, element) {
+        if (element == null) {
+          emptyTargetSpots.add(index);
+        }
+      });
+
+      final nextTargetSpotIndex = emptyTargetSpots.sample(1).first!;
+      _targetWords[nextTargetSpotIndex] = nextTargetWord.first;
+
+    }
   }
 
   @override
