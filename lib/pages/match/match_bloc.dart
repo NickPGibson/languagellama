@@ -24,6 +24,8 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
 
   int? _selectedNativeIndex;
   int? _selectedTargetIndex;
+  int? _incorrectNativeIndex;
+  int? _incorrectTargetIndex;
 
   final _nativeWords = List<String?>.filled(4, null, growable: false);
   final _targetWords = List<String?>.filled(4, null, growable: false);
@@ -66,11 +68,13 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
 
       if (event is NativeWordTapped) {
         _selectedNativeIndex = event.index;
+        _onTileTapped();
         emit(_matchState);
       }
 
       if (event is TargetWordTapped) {
         _selectedTargetIndex = event.index;
+        _onTileTapped();
         emit(_matchState);
       }
     }, transformer: sequential());
@@ -86,6 +90,9 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
         _targetWords[_selectedTargetIndex!] = null;
 
         //_getNextPair(3);
+      } else {
+        _incorrectNativeIndex = _selectedNativeIndex;
+        _incorrectTargetIndex = _selectedTargetIndex;
       }
 
       _selectedNativeIndex = null;
@@ -95,9 +102,24 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     return MatchInProgress(
       score: _score,
       secondsRemaining: _secondsRemaining,
-      nativeWords: _nativeWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedNativeIndex ?  MatchTileState.selected : MatchTileState.normal)).toList(),
-      targetWords: _targetWords.mapIndexed((index, e) => MatchTile(text: e, state: index == _selectedTargetIndex ?  MatchTileState.selected : MatchTileState.normal)).toList()
+      nativeWords: _nativeWords.mapIndexed((index, e) => MatchTile(text: e, state: _getTileState(index: index, selectedIndex: _selectedNativeIndex, incorrectIndex: _incorrectNativeIndex))).toList(),
+      targetWords: _targetWords.mapIndexed((index, e) => MatchTile(text: e, state: _getTileState(index: index, selectedIndex: _selectedTargetIndex, incorrectIndex: _incorrectTargetIndex))).toList()
     );
+  }
+
+  MatchTileState _getTileState({required int index, int? selectedIndex, int? incorrectIndex}) {
+    if (index == selectedIndex) {
+      return MatchTileState.selected;
+    } else if (index == incorrectIndex) {
+      return MatchTileState.incorrect;
+    } else {
+      return MatchTileState.normal;
+    }
+  }
+
+  void _onTileTapped() {
+    _incorrectNativeIndex = null;
+    _incorrectTargetIndex = null;
   }
 
   void _getNextPair(int minimumEmptySpots) {

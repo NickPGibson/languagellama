@@ -46,7 +46,7 @@ class MatchUi extends StatelessWidget {
                                 children: [
                                   Column(
                                     children: state.nativeWords.mapIndexed((index, e) => Panel(
-                                      color: e.state == MatchTileState.selected ? Colors.green : Colors.white,
+                                      color: _toColour(e.state),
                                       onTap: () => BlocProvider.of<MatchBloc>(context).add(NativeWordTapped(index: index)),
                                       visible: e.text != null,
                                       width: smallestSide,
@@ -57,7 +57,7 @@ class MatchUi extends StatelessWidget {
                                   ),
                                   Column(
                                     children: state.targetWords.mapIndexed((index, e) => Panel(
-                                      color: e.state == MatchTileState.selected ? Colors.green : Colors.white,
+                                      color: _toColour(e.state),
                                       onTap: () => BlocProvider.of<MatchBloc>(context).add(TargetWordTapped(index: index)),
                                       visible: e.text != null,
                                       width: smallestSide,
@@ -86,5 +86,16 @@ class MatchUi extends StatelessWidget {
         )
       ),
     );
+  }
+
+  Color _toColour(MatchTileState matchTileState) {
+    switch (matchTileState) {
+      case MatchTileState.normal:
+        return Colors.white;
+      case MatchTileState.selected:
+        return Colors.green;
+      case MatchTileState.incorrect:
+        return Colors.red;
+    }
   }
 }

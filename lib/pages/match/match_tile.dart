@@ -14,5 +14,6 @@ class MatchTile with EquatableMixin {
 
 enum MatchTileState {
   normal,
-  selected
+  selected,
+  incorrect
 }
