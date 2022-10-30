@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/main_menu/main_menu.dart';
 import 'package:languagellama/pages/match/match.dart';
 import 'package:languagellama/repository/repository.dart';
@@ -28,6 +29,13 @@ class MyApp extends StatelessWidget {
             path: 'play',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const MatchUi(),
+              color: Colors.deepPurple,
+            ),
+          ),
+          GoRoute(
+            path: 'finished',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: GameFinishedUi(score: state.extra as int),
               color: Colors.deepPurple,
             )
           ),
