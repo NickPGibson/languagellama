@@ -42,3 +42,8 @@ class TargetWordTapped extends MatchEvent {
   @override
   List<Object?> get props => [index];
 }
+
+class DoWordRefill extends MatchEvent {
+  @override
+  List<Object?> get props => [];
+}

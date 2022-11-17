@@ -30,9 +30,8 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
   final _nativeWords = List<String?>.filled(4, null, growable: false);
   final _targetWords = List<String?>.filled(4, null, growable: false);
 
-  final _timer = Timer();
   StreamSubscription<int>? _timerSubscription;
-
+  StreamSubscription? _wordRefillTimerSubscription;
 
   MatchBloc(this._repository) : super(MatchStateNotStarted()) {
     on<MatchEvent>((event, emit) {
@@ -49,18 +48,13 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
         _targetWords.setAll(0, initialTargetWords);
 
         _timerSubscription?.cancel();
-        _timerSubscription = _timer
-            .tick(ticks: _gameLength)
-            .listen((seconds) => add(TimerChanged(seconds: seconds)));
+        _timerSubscription = Timer().tick(ticks: _gameLength).listen((seconds) => add(TimerChanged(seconds: seconds)));
       }
 
       if (event is TimerChanged) {
         if (event.seconds == 0) {
           emit(MatchFinished(score: _score));
         } else {
-          if (event.seconds % 2 == 0) {
-            _getNextPair(1);
-          }
           _secondsRemaining = event.seconds;
           emit(_matchState);
         }
@@ -77,6 +71,10 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
         _onTileTapped();
         emit(_matchState);
       }
+
+      if (event is DoWordRefill) {
+        _getNextPair(1);
+      }
     }, transformer: sequential());
   }
 
@@ -89,7 +87,10 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
         _nativeWords[_selectedNativeIndex!] = null;
         _targetWords[_selectedTargetIndex!] = null;
 
-        //_getNextPair(3);
+        if (_nativeWords.where((element) => element == null).length == 1) {
+          _wordRefillTimerSubscription?.cancel();
+          _wordRefillTimerSubscription = Timer().tickPerpetual().listen((seconds) => add(DoWordRefill()));
+        }
       } else {
         _incorrectNativeIndex = _selectedNativeIndex;
         _incorrectTargetIndex = _selectedTargetIndex;
@@ -146,13 +147,13 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
 
       final nextTargetSpotIndex = emptyTargetSpots.sample(1).first!;
       _targetWords[nextTargetSpotIndex] = nextTargetWord.first;
-
     }
   }
 
   @override
   Future<void> close() {
     _timerSubscription?.cancel();
+    _wordRefillTimerSubscription?.cancel();
     return super.close();
   }
 }
