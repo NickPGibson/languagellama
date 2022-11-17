@@ -4,13 +4,18 @@ import 'package:equatable/equatable.dart';
 abstract class MatchEvent with EquatableMixin {}
 
 class StartMatch extends MatchEvent {
+
+  final String id;
+
+  StartMatch({required this.id});
+
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [id];
 }
 
 class FinishMatch extends MatchEvent {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class TimerChanged extends MatchEvent {

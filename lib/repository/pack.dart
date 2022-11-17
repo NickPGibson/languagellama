@@ -4,7 +4,7 @@ class Pack {
 
   final String name;
   final String? highScore;
-  Map<String, String> words;
+  final String id;
 
-  Pack({required this.name, this.highScore, required this.words});
+  Pack({required this.name, this.highScore, required this.id});
 }

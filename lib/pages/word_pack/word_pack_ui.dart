@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/word_pack/word_pack_bloc.dart';
 import 'package:languagellama/pages/word_pack/word_pack_card.dart';
 import 'package:languagellama/pages/word_pack/word_pack_event.dart';
@@ -28,7 +29,10 @@ class WordPackUi extends StatelessWidget {
                       'Choose a word pack',
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    ...state.packs.map((e) => WordPackCard(name: e.name))
+                    ...state.packs.map((e) => WordPackCard(
+                      name: e.name,
+                      onTapped: () => GoRouter.of(context).go('/wordPack/play', extra: e.id)
+                    ))
                   ],
                 );
               } else if (state is WordPackLoading) {

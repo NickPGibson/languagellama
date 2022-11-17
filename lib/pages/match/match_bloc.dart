@@ -37,7 +37,8 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     on<MatchEvent>((event, emit) {
       if (event is StartMatch) {
 
-        _repository.getLanguagePairs().forEach((key, value) {
+        final packContent = _repository.getWordPackContent(event.id);
+        packContent.words.forEach((key, value) {
           _answers.add(key, value);
         });
 

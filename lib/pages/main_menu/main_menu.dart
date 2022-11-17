@@ -18,10 +18,6 @@ class MainMenu extends StatelessWidget {
         const CircleAvatar(backgroundImage: AssetImage('assets/llama.png'), radius: 80),
         const SizedBox(height: 30,),
         StandardButton(title: "Start", onPressed: () {
-          GoRouter.of(context).go('/play');
-        }),
-        const SizedBox(height: 30,),
-        StandardButton(title: "Choose Word Pack", onPressed: () {
           GoRouter.of(context).go('/wordPack');
         }),
       ],

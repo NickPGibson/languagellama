@@ -6,8 +6,9 @@ class WordPackCard extends StatefulWidget {
 
   final String name;
   final int? highScore;
+  final void Function() onTapped;
 
-  const WordPackCard({required this.name, this.highScore, Key? key}) : super(key: key);
+  const WordPackCard({required this.name, this.highScore, required this.onTapped, Key? key}) : super(key: key);
 
   @override
   State<WordPackCard> createState() => _WordPackCardState();
@@ -20,6 +21,9 @@ class _WordPackCardState extends State<WordPackCard> {
     return Tappable(
       builder: (elevation) => Card(
         elevation: elevation,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -30,7 +34,7 @@ class _WordPackCardState extends State<WordPackCard> {
           ),
         ),
       ),
-      onTapped: () {},
+      onTapped: widget.onTapped,
     );
   }
 }

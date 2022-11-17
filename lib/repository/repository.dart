@@ -1,17 +1,38 @@
 
 
 import 'package:languagellama/repository/pack.dart';
+import 'package:languagellama/repository/pack_content.dart';
 
 class Repository {
 
-
   List<Pack> getPacks() {
     return [
-      Pack(name: "Verbs", words: _verbs),
-      Pack(name: "Animals", words: _animals),
+      Pack(name: "Verbs", id: _verbsId),
+      Pack(name: "Animals", id: _animalsId),
      // Pack(name: "Kitchen"),
     //  Pack(name: "Sports"),
     ];
+  }
+
+  static const _verbsId = "47d4f829-e732-4e20-939c-fd75e08ca5b9";
+  static const _animalsId = "ec32d823-cd52-483f-95b9-38e923fb7e66";
+
+  WordPackContent getWordPackContent(String id) {
+    if (id == _verbsId) {
+      return WordPackContent(words: _verbs);
+    } else if (id == _animalsId) {
+      return WordPackContent(words: _animals);
+    } else {
+      throw Exception("Invalid pack id $id");
+    }
+  }
+
+  int? getHighScore({required String id}) {
+    // todo
+  }
+
+  void setHighScore({required String id, required int highScore}) {
+    // todo
   }
 
   static const Map<String, String> _verbs = {
@@ -44,24 +65,4 @@ class Repository {
     "bear": "oso",
     "wolf": "lobo"
   };
-
-  Map<String, String> getLanguagePairs() {
-    return {
-      "hello": "hola",
-      "dog": "perro",
-      "cat": "gato",
-      "woman": "mujer",
-      "look": "mirar",
-      "eat": "comer",
-      "start": "empezar",
-      "wolf": "lobo",
-      "war": "guerra",
-      "swim": "nadar",
-      "card": "tarjeta",
-      "cash": "efectivo",
-      "bed": "cama",
-      "shoe": "zapato"
-    };
-  }
 }
-

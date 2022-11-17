@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/main_menu/main_menu.dart';
+import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match.dart';
 import 'package:languagellama/pages/word_pack/word_pack_ui.dart';
 import 'package:languagellama/repository/repository.dart';
@@ -27,23 +28,25 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => const MainMenu(key: Key('main menu')),
         routes: [
           GoRoute(
-            path: 'play',
-            pageBuilder: (context, state) => buildMyTransition<void>(
-              child: const MatchUi(),
-              color: Colors.deepPurple,
-            ),
-          ),
-          GoRoute(
             path: 'wordPack',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const WordPackUi(),
               color: Colors.deepPurple,
             ),
+            routes: [
+              GoRoute(
+                path: 'play',
+                pageBuilder: (context, state) => buildMyTransition<void>(
+                  child: MatchUi(packId: state.extra as String),
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ]
           ),
           GoRoute(
             path: 'finished',
             pageBuilder: (context, state) => buildMyTransition<void>(
-              child: GameFinishedUi(score: state.extra as int),
+              child: GameFinishedUi(summary: state.extra as GameSummary),
               color: Colors.deepPurple,
             )
           ),

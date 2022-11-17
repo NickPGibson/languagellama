@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/match/game_state.dart';
+import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match_bloc.dart';
 import 'package:languagellama/pages/match/match_event.dart';
 import 'package:languagellama/pages/match/match_state.dart';
@@ -16,17 +17,20 @@ import 'package:collection/collection.dart';
 import 'match_tile.dart';
 
 class MatchUi extends StatelessWidget {
-  const MatchUi({Key? key}) : super(key: key);
+
+  final String packId;
+
+  const MatchUi({required this.packId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MatchBloc(context.read<Repository>())..add(StartMatch()),
+      create: (context) => MatchBloc(context.read<Repository>())..add(StartMatch(id: packId)),
       child: Builder(
         builder: (context) => BlocListener<MatchBloc, MatchState>(
           listener: (context, state) {
             if (state is MatchFinished) {
-              GoRouter.of(context).go('/finished', extra: state.score);
+              GoRouter.of(context).go('/finished', extra: GameSummary(id: packId, score: state.score));
             }
           },
           child: LlamaGameWidget(
@@ -40,7 +44,7 @@ class MatchUi extends StatelessWidget {
                           score: state.score
                       ),
                       Expanded(
-                        child: LayoutBuilder(
+                        child: LayoutBuilder( // use AspectRatio and grid view? https://www.youtube.com/watch?v=G1l8U8DTkvk
                           builder: (context, constraints) {
                             const numRows = 4;
                             const numColumns = 2;
