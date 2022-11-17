@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:languagellama/widgets/tappable.dart';
 
 class StandardButton extends StatefulWidget {
   const StandardButton({
@@ -22,41 +23,13 @@ class StandardButton extends StatefulWidget {
 
 class _StandardButtonState extends State<StandardButton> {
 
-  bool _isTappedDown = false;
-
   static const offset = 2.0;
   static const curveRadius = 30.0;
 
-  void _onTapDown(_) {
-    setState(() {
-      _isTappedDown = true;
-    });
-  }
-
-  void _onTapUp(_) {
-    widget.onPressed();
-    setState(() {
-      _reset();
-    });
-  }
-
-  void _onTapCancel() {
-    setState(() {
-      _reset();
-    });
-  }
-
-  void _reset() {
-    _isTappedDown = false;
-  }
-
   @override
-  Widget build(BuildContext context) => GestureDetector(
-    onTapUp: _onTapUp,
-    onTapDown: _onTapDown,
-    onTapCancel: _onTapCancel,
-    child: Material(
-      elevation: _isTappedDown ? 0.0 : 5.0,
+  Widget build(BuildContext context) => Tappable(
+    builder: (elevation) => Material(
+      elevation: elevation,
       borderRadius: BorderRadius.circular(curveRadius),
       shadowColor: Colors.black,
       color: Colors.transparent,
@@ -87,6 +60,8 @@ class _StandardButtonState extends State<StandardButton> {
           ),
         ),
       ),
-    ),
+    ), onTapped: () {
+      widget.onPressed();
+    },
   );
 }

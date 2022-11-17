@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/main_menu/main_menu.dart';
 import 'package:languagellama/pages/match/match.dart';
+import 'package:languagellama/pages/word_pack/word_pack_ui.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/transition.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,13 @@ class MyApp extends StatelessWidget {
             path: 'play',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const MatchUi(),
+              color: Colors.deepPurple,
+            ),
+          ),
+          GoRoute(
+            path: 'wordPack',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: const WordPackUi(),
               color: Colors.deepPurple,
             ),
           ),
