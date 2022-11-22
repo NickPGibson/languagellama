@@ -4,11 +4,11 @@ import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:languagellama/assets_repository/assets_repository.dart';
 import 'package:languagellama/pages/match/match_event.dart';
 import 'package:languagellama/pages/match/match_state.dart';
 import 'package:languagellama/pages/match/match_tile.dart';
 import 'package:languagellama/pages/match/timer.dart';
-import 'package:languagellama/repository/repository.dart';
 import 'package:quiver/collection.dart';
 import 'package:collection/collection.dart';
 
@@ -18,7 +18,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
   var _secondsRemaining = _gameLength;
   var _score = 0;
 
-  final Repository _repository;
+  final AssetsRepository _assetsRepository;
 
   final _answers = Multimap<String, String>();
 
@@ -33,12 +33,12 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
   StreamSubscription<int>? _timerSubscription;
   StreamSubscription? _wordRefillTimerSubscription;
 
-  MatchBloc(this._repository) : super(MatchStateNotStarted()) {
-    on<MatchEvent>((event, emit) {
+  MatchBloc(this._assetsRepository) : super(MatchStateNotStarted()) {
+    on<MatchEvent>((event, emit) async {
       if (event is StartMatch) {
 
-        final packContent = _repository.getWordPackContent(event.id);
-        packContent.words.forEach((key, value) {
+        final packContent = await _assetsRepository.getPackContent(event.id);
+        packContent.forEach((key, value) {
           _answers.add(key, value);
         });
 

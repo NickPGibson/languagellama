@@ -5,7 +5,8 @@
 .packages
 build/
 .idea
-
+.flutter-plugins-dependencies
+.flutter-plugins
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.

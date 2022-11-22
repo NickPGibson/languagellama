@@ -10,12 +10,19 @@ class GameFinishedBloc extends Bloc<GameFinishedEvent, GameFinishedState> {
   final Repository _repository;
 
   GameFinishedBloc(this._repository): super(GameFinishedInitial()) {
-    on<GameFinishedEvent>((event, emit) {
+    on<GameFinishedEvent>((event, emit) async {
       if (event is LoadGameSummary) {
-        final highScore = _repository.getHighScore(id: event.id);
-        if (highScore != null && event.score > highScore) {
+        emit(GameFinishedLoading());
+        final packUserData = await _repository.getPackUserData(event.id);
+        final highScore = packUserData?.highScore;
+        final isNewHighScore = highScore == null || event.score > highScore;
+        if (isNewHighScore) {
           _repository.setHighScore(id: event.id, highScore: event.score);
         }
+        emit(GameFinishedLoaded(
+          highScore: isNewHighScore ? event.score: highScore,
+          isNewHighScore: isNewHighScore
+        ));
       }
     }, transformer: sequential());
   }

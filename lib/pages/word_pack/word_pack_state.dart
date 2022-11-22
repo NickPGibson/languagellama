@@ -1,6 +1,6 @@
 
 import 'package:equatable/equatable.dart';
-import 'package:languagellama/repository/pack.dart';
+import 'package:languagellama/pages/word_pack/pack.dart';
 
 abstract class WordPackState extends Equatable {}
 

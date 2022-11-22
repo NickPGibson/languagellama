@@ -24,19 +24,30 @@ class GameFinishedUi extends StatelessWidget {
       child: Builder(
         builder: (context) => BlocBuilder<GameFinishedBloc, GameFinishedState>(
           builder: (context, state) {
-            return Column(
-              children: [
-                Text(
-                  'Score: ${summary.score}',
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                const SizedBox(height: 30,),
-                StandardButton(
-                  title: "Play again",
-                  onPressed: () => GoRouter.of(context).go('/wordPack/play', extra: summary.id)
-                ),
-              ],
-            );
+            if (state is GameFinishedLoaded) {
+              return Column(
+                children: [
+                  Text(
+                    'Score: ${summary.score}',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  const SizedBox(height: 30,),
+                  Text(
+                    'High Score: ${state.highScore}',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  const SizedBox(height: 30,),
+                  StandardButton(
+                      title: "Play again",
+                      onPressed: () => GoRouter.of(context).go('/wordPack/play', extra: summary.id)
+                  ),
+                ],
+              );
+            } else if (state is GameFinishedLoading) {
+              return const Center(child: CircularProgressIndicator(),);
+            } else {
+              return const SizedBox.shrink();
+            }
           }
         ),
       ),

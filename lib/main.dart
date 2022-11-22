@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:languagellama/assets_repository/assets_repository.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/main_menu/main_menu.dart';
 import 'package:languagellama/pages/match/game_summary.dart';
@@ -15,11 +16,11 @@ void main() {
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
   );
-  runApp(const MyApp());
+  runApp(const LanguageLlamaApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LanguageLlamaApp extends StatelessWidget {
+  const LanguageLlamaApp({super.key});
 
   static final _router = GoRouter(
     routes: [
@@ -57,8 +58,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => Repository(),
+    return MultiProvider(
+      providers: [
+        Provider<Repository>(
+          create: (context) => Repository(),
+        ),
+        Provider<AssetsRepository>(
+          create: (context) => AssetsRepository(DefaultAssetBundle.of(context)),
+        )
+      ],
       child: MaterialApp.router(
         theme: ThemeData(
           fontFamily: 'Quicksand',

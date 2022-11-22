@@ -1,0 +1,13 @@
+{
+  "start": "empezar",
+  "eat": "comer",
+  "swim": "nadar",
+  "sleep": "dormir",
+  "run": "correr",
+  "go": "ir",
+  "finish": "terminar",
+  "stay": "quedarse",
+  "write": "escribir",
+  "live": "vivir",
+  "cry": "llorar"
+}
