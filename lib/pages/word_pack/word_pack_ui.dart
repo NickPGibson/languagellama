@@ -10,6 +10,7 @@ import 'package:languagellama/pages/word_pack/word_pack_event.dart';
 import 'package:languagellama/pages/word_pack/word_pack_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WordPackUi extends StatelessWidget {
   const WordPackUi({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class WordPackUi extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'Choose a word pack',
+                      AppLocalizations.of(context)!.chooseAWordPack,
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     ...state.packs.map((e) => WordPackCard(

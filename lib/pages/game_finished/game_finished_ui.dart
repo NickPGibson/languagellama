@@ -10,6 +10,7 @@ import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameFinishedUi extends StatelessWidget {
 
@@ -28,17 +29,17 @@ class GameFinishedUi extends StatelessWidget {
               return Column(
                 children: [
                   Text(
-                    'Score: ${summary.score}',
+                    AppLocalizations.of(context)!.score(summary.score),
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   const SizedBox(height: 30,),
                   Text(
-                    'High Score: ${state.highScore}',
+                    AppLocalizations.of(context)!.highScore(state.highScore),
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   const SizedBox(height: 30,),
                   StandardButton(
-                      title: "Play again",
+                      title: AppLocalizations.of(context)!.playAgain,
                       onPressed: () => GoRouter.of(context).go('/wordPack/play', extra: summary.id)
                   ),
                 ],

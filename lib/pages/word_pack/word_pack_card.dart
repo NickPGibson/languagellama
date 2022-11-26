@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/tappable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WordPackCard extends StatefulWidget {
 
@@ -29,7 +30,7 @@ class _WordPackCardState extends State<WordPackCard> {
           child: Column(
             children: [
               Text(widget.name, style: Theme.of(context).textTheme.headlineSmall,),
-              Text("High score: ${widget.highScore}", style: Theme.of(context).textTheme.bodyMedium,)
+              Text(widget.highScore != null ? AppLocalizations.of(context)!.highScore(widget.highScore!) : AppLocalizations.of(context)!.notPlayed, style: Theme.of(context).textTheme.bodyMedium,)
             ]
           ),
         ),

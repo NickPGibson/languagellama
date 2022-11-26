@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/llama_game_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PauseUi extends StatelessWidget {
   final void Function() onResume;
@@ -17,14 +18,14 @@ class PauseUi extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Paused", style: Theme.of(context).textTheme.headline5,),
+            Text(AppLocalizations.of(context)!.paused, style: Theme.of(context).textTheme.headline5,),
             const SizedBox(height: 10,),
-            StandardButton(title: "Resume", onPressed: () {
+            StandardButton(title: AppLocalizations.of(context)!.resume, onPressed: () {
               onResume();
               Navigator.of(context).pop();
             }),
             const SizedBox(height: 10,),
-            StandardButton(title: "Exit", onPressed: () {
+            StandardButton(title: AppLocalizations.of(context)!.exit, onPressed: () {
               onExit();
               Navigator.of(context).pop();
             }),
