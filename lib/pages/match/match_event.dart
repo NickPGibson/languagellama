@@ -52,3 +52,13 @@ class DoWordRefill extends MatchEvent {
   @override
   List<Object?> get props => [];
 }
+
+class Pause extends MatchEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class Resume extends MatchEvent {
+  @override
+  List<Object?> get props => [];
+}
