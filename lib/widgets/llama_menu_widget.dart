@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/animation_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LlamaMenuWidget extends StatefulWidget {
 
@@ -27,7 +28,7 @@ class _LlamaMenuWidgetState extends State<LlamaMenuWidget> with TickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Language Llama", ),
+        title: Text(AppLocalizations.of(context)!.languageLLama),
       ),
       body: DecoratedBoxTransition(
         decoration: decorationTween.animate(_controller),

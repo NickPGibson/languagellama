@@ -10,6 +10,7 @@ import 'package:languagellama/pages/word_pack/word_pack_ui.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/transition.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +76,8 @@ class LanguageLlamaApp extends StatelessWidget {
         routeInformationProvider: _router.routeInformationProvider,
         routeInformationParser: _router.routeInformationParser,
         routerDelegate: _router.routerDelegate,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
       ),
     );
   }

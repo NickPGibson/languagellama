@@ -1,0 +1,43 @@
+{
+    "welcomeToLanguageLLama": "Bienvenido a la llama de los idiomas!",
+    "@welcomeToLanguageLLama": {
+    },
+    "languageLLama": "La llama de los idiomas",
+    "@languageLLama": {
+    },
+    "start": "Empezar",
+    "@start": {
+    },
+    "chooseAWordPack": "Elige un pack de palabras",
+    "@chooseAWordPack": {
+    },
+    "highScore": "Récord: {score}",
+    "@highScore": {
+      "type": "text",
+      "placeholders": {
+        "score": {}
+      }
+    },
+    "score": "Puntuación: {score}",
+    "@score": {
+      "type": "text",
+      "placeholders": {
+        "score": {}
+      }
+    },
+    "notPlayed": "No has jugado",
+    "@notPlayed": {
+    },
+    "playAgain": "Volver a jugar",
+    "@playAgain": {
+    },
+    "paused": "En pausa",
+    "@paused": {
+    },
+    "resume": "Reanudar",
+    "@resume": {
+    },
+    "exit": "Salir",
+    "@exit": {
+    }
+}

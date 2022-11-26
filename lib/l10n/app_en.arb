@@ -1,0 +1,44 @@
+{
+    "welcomeToLanguageLLama": "Welcome to Language Llama!",
+    "@welcomeToLanguageLLama": {
+    },
+    "languageLLama": "Language Llama",
+    "@languageLLama": {
+    },
+    "start": "Start",
+    "@start": {
+    },
+    "chooseAWordPack": "Choose a word pack",
+    "@chooseAWordPack": {
+    },
+    "highScore": "High Score: {score}",
+    "@highScore": {
+      "type": "text",
+      "placeholders": {
+        "score": {}
+      }
+    },
+    "score": "Score: {score}",
+    "@score": {
+      "type": "text",
+      "placeholders": {
+        "score": {}
+      }
+    },
+    "notPlayed": "Not Played",
+    "@notPlayed": {
+    },
+    "playAgain": "Play again",
+    "@playAgain": {
+    },
+    "paused": "Paused",
+    "@paused": {
+    },
+    "resume": "Resume",
+    "@resume": {
+    },
+    "exit": "Exit",
+    "@exit": {
+    }
+}
+

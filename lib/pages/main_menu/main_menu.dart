@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -11,13 +12,13 @@ class MainMenu extends StatelessWidget {
     child: Column(
       children: [
         Text(
-          'Welcome to Language Llama!',
+          AppLocalizations.of(context)!.welcomeToLanguageLLama,
           style: Theme.of(context).textTheme.headline5,
         ),
         const SizedBox(height: 30,),
         const CircleAvatar(backgroundImage: AssetImage('assets/llama.png'), radius: 80),
         const SizedBox(height: 30,),
-        StandardButton(title: "Start", onPressed: () {
+        StandardButton(title: AppLocalizations.of(context)!.start, onPressed: () {
           GoRouter.of(context).go('/wordPack');
         }),
       ],
