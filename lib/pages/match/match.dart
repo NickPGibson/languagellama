@@ -10,11 +10,12 @@ import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match_bloc.dart';
 import 'package:languagellama/pages/match/match_event.dart';
 import 'package:languagellama/pages/match/match_state.dart';
+import 'package:languagellama/pages/match/match_tile.dart';
+import 'package:languagellama/pages/match/pause_ui.dart';
 import 'package:languagellama/widgets/llama_game_widget.dart';
 import 'package:languagellama/widgets/panel.dart';
 import 'package:collection/collection.dart';
 
-import 'match_tile.dart';
 
 class MatchUi extends StatelessWidget {
 
@@ -84,7 +85,21 @@ class MatchUi extends StatelessWidget {
                           },
                         ),
                       ),
-                      IconButton(onPressed: () {}, icon: const Icon(Icons.pause, size: 50,),)
+                      IconButton(onPressed: () async {
+                        BlocProvider.of<MatchBloc>(context).add(Pause());
+                        await showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (c) => PauseUi(
+                            onResume: () {
+                              BlocProvider.of<MatchBloc>(context).add(Resume());
+                            },
+                            onExit: () {
+                              GoRouter.of(c).pop();
+                            },
+                          )
+                        );
+                      }, icon: const Icon(Icons.pause, size: 50)),
                     ],
                   );
                 } else {

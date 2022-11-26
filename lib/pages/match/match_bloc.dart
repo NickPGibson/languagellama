@@ -76,6 +76,14 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
       if (event is DoWordRefill) {
         _getNextPair(1);
       }
+
+      if (event is Pause) {
+        _timerSubscription?.pause();
+      }
+
+      if (event is Resume) {
+        _timerSubscription?.resume();
+      }
     }, transformer: sequential());
   }
 
