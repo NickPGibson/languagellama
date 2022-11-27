@@ -61,6 +61,15 @@ dev_dependencies:
   isar_generator: ^3.0.5
   build_runner: ^2.3.2
   json_serializable: ^6.5.4
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/llama.png"
+  remove_alpha_ios: true
+  web:
+    generate: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
