@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "776160674781",
+    "project_id": "language-llama",
+    "storage_bucket": "language-llama.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776160674781:android:1caf0ee99bff32eb2cec34",
+        "android_client_info": {
+          "package_name": "com.github.NickPGibson.languagellama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776160674781-aqv9dr678ulg3tb4ce2pldnbqo90ijdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXMCFSGAcOICA3DrbiXmWlamA6FToAE_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776160674781-aqv9dr678ulg3tb4ce2pldnbqo90ijdh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "776160674781-l4of8j1q445pfc2tne7qc153ag51o7rb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.github.NickPGibson.languagellama"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

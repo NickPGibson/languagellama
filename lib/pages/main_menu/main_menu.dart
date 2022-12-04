@@ -18,8 +18,12 @@ class MainMenu extends StatelessWidget {
         const SizedBox(height: 30,),
         const CircleAvatar(backgroundImage: AssetImage('assets/llama.png'), radius: 80),
         const SizedBox(height: 30,),
-        StandardButton(title: AppLocalizations.of(context)!.start, onPressed: () {
-          GoRouter.of(context).go('/wordPack');
+        StandardButton(title: "Login", onPressed: () {
+          GoRouter.of(context).go('/login');
+        }),
+        const SizedBox(height: 30,),
+        StandardButton(title: "Create Account", onPressed: () {
+          GoRouter.of(context).go('/createAccount');
         }),
       ],
     )
