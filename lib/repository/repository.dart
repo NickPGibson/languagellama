@@ -40,6 +40,14 @@ class Repository {
     }
   }
 
+  Future<void> deleteAccount() async {
+    try {
+      await FirebaseAuth.instance.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message);
+    }
+  }
+
   Future<void> login({required String email, required String password}) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/box_decoration.dart';
 import 'package:languagellama/widgets/options/options_bloc.dart';
@@ -17,7 +18,7 @@ class OptionsUi extends StatelessWidget {
       create: (context) => OptionsBloc(context.read<Repository>())..add(const InitOptions()),
       child: Builder(
         builder: (context) => Drawer(
-          child:BlocBuilder<OptionsBloc, OptionsState>(
+          child: BlocBuilder<OptionsBloc, OptionsState>(
             builder: (context, state) {
               if (state is OptionsStateReady) {
                 return ListView(
@@ -43,11 +44,18 @@ class OptionsUi extends StatelessWidget {
                       leading: const Icon(Icons.settings_outlined),
                       title: const Text('Settings'),
                       onTap: () {
+                        GoRouter.of(context).go('/settings');
                       },
                     ),
                     ListTile(
                       leading: const Icon(Icons.favorite_border_outlined),
-                      title: const Text('About the app'),
+                      title: const Text('About The App'),
+                      onTap: () {
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.email_outlined),
+                      title: const Text('Contact Us'),
                       onTap: () {
                       },
                     ),

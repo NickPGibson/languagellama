@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/assets_repository/assets_repository.dart';
+import 'package:languagellama/pages/account_settings/account_settings_ui.dart';
 import 'package:languagellama/pages/create_account/create_account_ui.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/init/init_bloc.dart';
@@ -75,7 +76,14 @@ class LanguageLlamaApp extends StatelessWidget {
               child: const LoginUi(),
               color: Colors.deepPurple,
             )
-          )
+          ),
+          GoRoute(
+            path: 'settings',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: const AccountSettingsUi(),
+              color: Colors.deepPurple,
+            )
+          ),
         ],
       )
     ]
