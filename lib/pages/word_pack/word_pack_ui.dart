@@ -11,6 +11,7 @@ import 'package:languagellama/pages/word_pack/word_pack_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:languagellama/widgets/options/options_ui.dart';
 
 class WordPackUi extends StatelessWidget {
   const WordPackUi({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class WordPackUi extends StatelessWidget {
       create: (context) => WordPackBloc(context.read<Repository>(), context.read<AssetsRepository>())..add(LoadPacks()),
       child: Builder(
         builder: (context) => LlamaMenuWidget(
+          endDrawer: const OptionsUi(),
           child: BlocBuilder<WordPackBloc, WordPackState>(
             builder: (context, state) {
               if (state is WordPackReady) {

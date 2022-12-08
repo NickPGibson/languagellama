@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/animation_utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:languagellama/widgets/box_decoration.dart';
 
 class LlamaMenuWidget extends StatefulWidget {
 
   final Widget child;
+  final AppBar? appBar;
+  final Widget? endDrawer;
 
-  const LlamaMenuWidget({required this.child, super.key});
+  const LlamaMenuWidget({required this.child, this.appBar, this.endDrawer, super.key});
 
   @override
   State<LlamaMenuWidget> createState() => _LlamaMenuWidgetState();
@@ -27,9 +30,10 @@ class _LlamaMenuWidgetState extends State<LlamaMenuWidget> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.appBar ?? AppBar(
         title: Text(AppLocalizations.of(context)!.languageLLama),
       ),
+      endDrawer: widget.endDrawer,
       body: DecoratedBoxTransition(
         decoration: decorationTween.animate(_controller),
         child: SizedBox(
@@ -51,17 +55,7 @@ class _LlamaMenuWidgetState extends State<LlamaMenuWidget> with TickerProviderSt
               ClipPath(
                 clipper: CustomClipPath(),
                 child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      colors: [
-                        Colors.deepPurple,
-                        Colors.deepPurple[500]!,
-                        Colors.deepPurple[600]!,
-                        Colors.deepPurple[700]!
-                      ]
-                    )
-                  ),
+                  decoration: getBoxDecoration(),
                   height: 100,
                 ),
               ),

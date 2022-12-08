@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:languagellama/widgets/tappable.dart';
+import 'package:languagellama/widgets/rounded_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WordPackCard extends StatefulWidget {
@@ -19,23 +19,14 @@ class _WordPackCardState extends State<WordPackCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Tappable(
-      builder: (elevation) => Card(
-        elevation: elevation,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(widget.name, style: Theme.of(context).textTheme.headlineSmall,),
-              Text(widget.highScore != null ? AppLocalizations.of(context)!.highScore(widget.highScore!) : AppLocalizations.of(context)!.notPlayed, style: Theme.of(context).textTheme.bodyMedium,)
-            ]
-          ),
-        ),
-      ),
+    return RoundedCard(
       onTapped: widget.onTapped,
+      child: Column(
+        children: [
+          Text(widget.name, style: Theme.of(context).textTheme.headlineSmall,),
+          Text(widget.highScore != null ? AppLocalizations.of(context)!.highScore(widget.highScore!) : AppLocalizations.of(context)!.notPlayed, style: Theme.of(context).textTheme.bodyMedium,)
+        ]
+      ),
     );
   }
 }
