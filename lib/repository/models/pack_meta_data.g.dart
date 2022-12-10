@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'static_pack.dart';
+part of 'pack_meta_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-StaticPack _$StaticPackFromJson(Map<String, dynamic> json) => StaticPack(
+PackMetaData _$PackMetaDataFromJson(Map<String, dynamic> json) => PackMetaData(
       name: json['name'] as String,
-      id: json['id'] as String,
+      languages: json['languages'] as String,
     );
 
-Map<String, dynamic> _$StaticPackToJson(StaticPack instance) =>
+Map<String, dynamic> _$PackMetaDataToJson(PackMetaData instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'id': instance.id,
+      'languages': instance.languages,
     };

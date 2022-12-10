@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:languagellama/assets_repository/assets_repository.dart';
 import 'package:languagellama/pages/word_pack/word_pack_bloc.dart';
 import 'package:languagellama/pages/word_pack/word_pack_card.dart';
 import 'package:languagellama/pages/word_pack/word_pack_event.dart';
@@ -19,7 +18,7 @@ class WordPackUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WordPackBloc(context.read<Repository>(), context.read<AssetsRepository>())..add(LoadPacks()),
+      create: (context) => WordPackBloc(context.read<Repository>())..add(LoadPacks()),
       child: Builder(
         builder: (context) => LlamaMenuWidget(
           endDrawer: const OptionsUi(),

@@ -13,11 +13,11 @@ class GameFinishedBloc extends Bloc<GameFinishedEvent, GameFinishedState> {
     on<GameFinishedEvent>((event, emit) async {
       if (event is LoadGameSummary) {
         emit(GameFinishedLoading());
-        final packUserData = await _repository.getPackUserData(event.id);
+        final packUserData = await _repository.getPackUserData(packId: event.id);
         final highScore = packUserData?.highScore;
         final isNewHighScore = highScore == null || event.score > highScore;
         if (isNewHighScore) {
-          _repository.setHighScore(id: event.id, highScore: event.score);
+          _repository.setHighScore(packId: event.id, highScore: event.score);
         }
         emit(GameFinishedLoaded(
           highScore: isNewHighScore ? event.score: highScore,

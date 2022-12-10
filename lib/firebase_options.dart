@@ -52,6 +52,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '776160674781',
     projectId: 'language-llama',
     authDomain: 'language-llama.firebaseapp.com',
+    databaseURL: 'https://language-llama-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'language-llama.appspot.com',
   );
 
@@ -60,6 +61,7 @@ class DefaultFirebaseOptions {
     appId: '1:776160674781:android:1caf0ee99bff32eb2cec34',
     messagingSenderId: '776160674781',
     projectId: 'language-llama',
+    databaseURL: 'https://language-llama-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'language-llama.appspot.com',
   );
 
@@ -68,6 +70,7 @@ class DefaultFirebaseOptions {
     appId: '1:776160674781:ios:12814489233cd30a2cec34',
     messagingSenderId: '776160674781',
     projectId: 'language-llama',
+    databaseURL: 'https://language-llama-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'language-llama.appspot.com',
     iosClientId: '776160674781-l4of8j1q445pfc2tne7qc153ag51o7rb.apps.googleusercontent.com',
     iosBundleId: 'com.github.NickPGibson.languagellama',
