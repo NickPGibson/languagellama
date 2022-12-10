@@ -24,23 +24,20 @@ class Repository {
     }
   }
 
-  Future<Map<String, PackUserData>> getAllPackUserData() async {
+  Stream<Map<String, PackUserData>> getAllPackUserData() {
     final user = _getFirebaseUser();
     if (user == null) {
       throw ServerException('User not logged in');
     }
-    try {
-      final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}");
-      final snapshot = await ref.get();
-      final v = snapshot.value;
+    final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}");
+    return ref.onValue.map((event) {
+      final v = event.snapshot.value;
       if (v == null) {
         return {};
       }
-      final map = v as Map<dynamic, dynamic>;
+      final map = Map<String, dynamic>.from(v as Map<dynamic, dynamic>);
       return map.map((id, v) => MapEntry(id, PackUserData.fromJson(Map<String, dynamic>.from(v as Map<dynamic, dynamic>))));
-    } catch (e) {
-      return {};
-    }
+    });
   }
 
   Future<Map<String, PackMetaData>> getPackIndex(LanguagePair languages) async {
