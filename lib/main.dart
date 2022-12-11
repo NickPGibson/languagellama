@@ -36,6 +36,17 @@ class LanguageLlamaApp extends StatelessWidget {
   const LanguageLlamaApp({super.key});
 
   static final _router = GoRouter(
+    redirect: (context, state) {
+      final path = state.location;
+      final userIsLoggedIn = context.read<Repository>().getUser() != null;
+      final loggedOutPages = {"/login", "/createAccount"};
+      final pageRequiresAuth = !loggedOutPages.contains(path);
+      if (path != "/" && (userIsLoggedIn ^ pageRequiresAuth)) {
+        return "/";
+      } else {
+        return null;
+      }
+    },
     routes: [
       GoRoute(
         path: '/',
