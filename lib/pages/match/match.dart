@@ -97,6 +97,7 @@ class MatchUi extends StatelessWidget {
                             onExit: () {
                               GoRouter.of(c).pop();
                             },
+                            packId: packId,
                           )
                         );
                       }, icon: const Icon(Icons.pause, size: 50)),

@@ -6,6 +6,7 @@ import 'package:languagellama/repository/auth_user.dart';
 import 'package:languagellama/repository/exceptions.dart';
 import 'package:languagellama/repository/models/pack_meta_data.dart';
 import 'package:languagellama/repository/models/pack_user_data.dart';
+import 'package:uuid/uuid.dart';
 
 class Repository {
 
@@ -115,6 +116,21 @@ class Repository {
   }
 
   Future<void> logout() => FirebaseAuth.instance.signOut();
+
+  Future<void> sendErrorReport({required String message, required String packId}) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    final uuid = const Uuid().v4();
+    final ref = FirebaseDatabase.instance.ref("error_report/$uuid");
+    ref.update({
+      'message': message,
+      'user_id': user.uid,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'pack_id': packId,
+    });
+  }
 
   User? _getFirebaseUser() => FirebaseAuth.instance.currentUser;
 
