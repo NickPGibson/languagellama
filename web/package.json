@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "firebase": "^9.15.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "scripts": {
+    "build": "webpack --mode=development"
+  },
+  "name": "language-llama",
+  "version": "1.0.0",
+  "description": "no desc",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "private"
+  },
+  "author": "Nick Gibson",
+  "license": "ISC"
+}

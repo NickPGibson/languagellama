@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:languagellama/assets_repository/assets_repository.dart';
 import 'package:languagellama/pages/match/game_state.dart';
 import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match_bloc.dart';
@@ -12,6 +11,7 @@ import 'package:languagellama/pages/match/match_event.dart';
 import 'package:languagellama/pages/match/match_state.dart';
 import 'package:languagellama/pages/match/match_tile.dart';
 import 'package:languagellama/pages/match/pause_ui.dart';
+import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/llama_game_widget.dart';
 import 'package:languagellama/widgets/panel.dart';
 import 'package:collection/collection.dart';
@@ -26,7 +26,7 @@ class MatchUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MatchBloc(context.read<AssetsRepository>())..add(StartMatch(id: packId)),
+      create: (context) => MatchBloc(context.read<Repository>())..add(StartMatch(id: packId)),
       child: Builder(
         builder: (context) => BlocListener<MatchBloc, MatchState>(
           listener: (context, state) {

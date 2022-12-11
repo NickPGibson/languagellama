@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:languagellama/assets_repository/assets_repository.dart';
 import 'package:languagellama/pages/account_settings/account_settings_ui.dart';
 import 'package:languagellama/pages/create_account/create_account_ui.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
@@ -12,7 +11,6 @@ import 'package:languagellama/pages/init/init_ui.dart';
 import 'package:languagellama/pages/login/login_ui.dart';
 import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match.dart';
-import 'package:languagellama/pages/word_pack/word_pack_ui.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/transition.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +25,9 @@ void main() async {
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+    // if we get an error saying A Firebase App named "[DEFAULT]" already exists, then usually flutter clean or rebuilding will solve it.
+    // Alternatively, can add name argument here (see below), although this seems to break web support so don't actually do this. Only spent 2.5 hours figuring this out.
+    //name: "language-llama"
   );
   runApp(const LanguageLlamaApp());
 }
@@ -41,20 +42,11 @@ class LanguageLlamaApp extends StatelessWidget {
         builder: (context, state) => const InitUi(),
         routes: [
           GoRoute(
-            path: 'wordPack',
+            path: 'play',
             pageBuilder: (context, state) => buildMyTransition<void>(
-              child: const WordPackUi(),
+              child: MatchUi(packId: state.extra as String),
               color: Colors.deepPurple,
             ),
-            routes: [
-              GoRoute(
-                path: 'play',
-                pageBuilder: (context, state) => buildMyTransition<void>(
-                  child: MatchUi(packId: state.extra as String),
-                  color: Colors.deepPurple,
-                ),
-              ),
-            ]
           ),
           GoRoute(
             path: 'finished',
@@ -95,9 +87,6 @@ class LanguageLlamaApp extends StatelessWidget {
       providers: [
         Provider<Repository>(
           create: (context) => Repository(),
-        ),
-        Provider<AssetsRepository>(
-          create: (context) => AssetsRepository(DefaultAssetBundle.of(context)),
         )
       ],
       child: Builder(

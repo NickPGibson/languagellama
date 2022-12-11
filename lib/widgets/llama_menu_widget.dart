@@ -47,7 +47,9 @@ class _LlamaMenuWidgetState extends State<LlamaMenuWidget> with TickerProviderSt
                   child: Column(
                     children: [
                       const SizedBox(height: 100,),
-                      widget.child
+                      SafeArea(
+                        child: widget.child,
+                      )
                     ]
                   )
                 )

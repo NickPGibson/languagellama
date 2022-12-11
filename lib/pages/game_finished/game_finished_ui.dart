@@ -40,7 +40,7 @@ class GameFinishedUi extends StatelessWidget {
                   const SizedBox(height: 30,),
                   StandardButton(
                       title: AppLocalizations.of(context)!.playAgain,
-                      onPressed: () => GoRouter.of(context).go('/wordPack/play', extra: summary.id)
+                      onPressed: () => GoRouter.of(context).go('/play', extra: summary.id)
                   ),
                 ],
               );

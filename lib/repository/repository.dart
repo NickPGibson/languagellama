@@ -1,34 +1,92 @@
 
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:isar/isar.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:languagellama/repository/auth_user.dart';
 import 'package:languagellama/repository/exceptions.dart';
-import 'package:languagellama/repository/pack_user_data.dart';
+import 'package:languagellama/repository/models/pack_meta_data.dart';
+import 'package:languagellama/repository/models/pack_user_data.dart';
 
 class Repository {
 
-  final Future<Isar> _db;
-
-  static Future<Isar> _openDB() {
-    if (Isar.instanceNames.isEmpty) {
-      return Isar.open([PackUserDataSchema]);
+  Future<PackUserData?> getPackUserData({required String packId}) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
     }
-    return Future.value(Isar.getInstance());
+    try {
+      final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}/$packId");
+      final snapshot = await ref.get();
+      final v = snapshot.value;
+      return v == null ? null : PackUserData.fromJson(Map<String, dynamic>.from(v as Map<dynamic, dynamic>));
+    } catch (e) {
+      return null;
+    }
   }
 
-  Repository() : _db = _openDB(); // might want to pass in _db as a constructor arg for mocking purposes
-
-  Future<PackUserData?> getPackUserData(String id) async {
-    final db = await _db;
-    return db.packUserDatas.getById(id);
+  Stream<Map<String, PackUserData>> getAllPackUserData() {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}");
+    return ref.onValue.map((event) {
+      final v = event.snapshot.value;
+      if (v == null) {
+        return {};
+      }
+      final map = Map<String, dynamic>.from(v as Map<dynamic, dynamic>);
+      return map.map((id, v) => MapEntry(id, PackUserData.fromJson(Map<String, dynamic>.from(v as Map<dynamic, dynamic>))));
+    });
   }
 
-  void setHighScore({required String id, required int highScore}) async {
-    final db = await _db;
-    final p = PackUserData(id: id, highScore: highScore);
-    await db.writeTxn(() async {
-      await db.packUserDatas.put(p);
+  Future<Map<String, PackMetaData>> getPackIndex(LanguagePair languages) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    try {
+      final ref = FirebaseDatabase.instance.ref("pack_index");
+      final snapshot = await ref.orderByChild("languages").equalTo(languages.asString).get();
+      final v = snapshot.value;
+      if (v == null) {
+        return {};
+      }
+      final map = Map<String, dynamic>.from(v as Map<dynamic, dynamic>);
+      return map.map(
+        (id, v) => MapEntry(id, PackMetaData.fromJson(Map<String, dynamic>.from(v as Map<dynamic, dynamic>))),
+      );
+    } catch (e) {
+      return {};
+    }
+  }
+
+  Future<Map<String, String>> getPackContents(String packId) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    try {
+      final ref = FirebaseDatabase.instance.ref("pack_contents/$packId");
+      final snapshot = await ref.get();
+      final v = snapshot.value;
+      if (v == null) {
+        return {};
+      }
+      return Map<String, String>.from(v as Map<dynamic, dynamic>);
+    } catch (e) {
+      return {};
+    }
+  }
+
+  void setHighScore({required String packId, required int highScore}) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}/$packId");
+    ref.update({
+      'high_score': highScore
     });
   }
 
@@ -58,11 +116,11 @@ class Repository {
 
   Future<void> logout() => FirebaseAuth.instance.signOut();
 
-  AuthUser? getUser() =>
-      _fromFirebaseUser(FirebaseAuth.instance.currentUser);
+  User? _getFirebaseUser() => FirebaseAuth.instance.currentUser;
 
-  Stream<AuthUser?> getAuthStateStream() => FirebaseAuth.instance.authStateChanges()
-      .map((user) => _fromFirebaseUser(user));
+  AuthUser? getUser() => _fromFirebaseUser(_getFirebaseUser());
+
+  Stream<AuthUser?> getAuthStateStream() => FirebaseAuth.instance.authStateChanges().map((user) => _fromFirebaseUser(user));
 
   AuthUser? _fromFirebaseUser(User? user) {
     if (user == null) {
@@ -71,4 +129,12 @@ class Repository {
       return AuthUser(username: user.email);
     }
   }
+}
+
+enum LanguagePair {
+  enEs("en_es");
+
+  const LanguagePair(this.asString);
+
+  final String asString;
 }
