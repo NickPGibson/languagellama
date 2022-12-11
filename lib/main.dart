@@ -25,8 +25,10 @@ void main() async {
     SystemUiMode.edgeToEdge,
   );
   await Firebase.initializeApp(
-    name: "language-llama",
     options: DefaultFirebaseOptions.currentPlatform,
+    // if we get an error saying A Firebase App named "[DEFAULT]" already exists, then usually flutter clean or rebuilding will solve it.
+    // Alternatively, can add name argument here (see below), although this seems to break web support so don't actually do this. Only spent 2.5 hours figuring this out.
+    //name: "language-llama"
   );
   runApp(const LanguageLlamaApp());
 }
