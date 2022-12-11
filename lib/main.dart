@@ -11,7 +11,6 @@ import 'package:languagellama/pages/init/init_ui.dart';
 import 'package:languagellama/pages/login/login_ui.dart';
 import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match.dart';
-import 'package:languagellama/pages/word_pack/word_pack_ui.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/transition.dart';
 import 'package:provider/provider.dart';
@@ -43,20 +42,11 @@ class LanguageLlamaApp extends StatelessWidget {
         builder: (context, state) => const InitUi(),
         routes: [
           GoRoute(
-            path: 'wordPack',
+            path: 'play',
             pageBuilder: (context, state) => buildMyTransition<void>(
-              child: const WordPackUi(),
+              child: MatchUi(packId: state.extra as String),
               color: Colors.deepPurple,
             ),
-            routes: [
-              GoRoute(
-                path: 'play',
-                pageBuilder: (context, state) => buildMyTransition<void>(
-                  child: MatchUi(packId: state.extra as String),
-                  color: Colors.deepPurple,
-                ),
-              ),
-            ]
           ),
           GoRoute(
             path: 'finished',

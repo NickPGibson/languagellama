@@ -35,7 +35,7 @@ class WordPackUi extends StatelessWidget {
                     ...state.packs.map((e) => WordPackCard(
                       name: e.name,
                       highScore: e.highScore,
-                      onTapped: () => GoRouter.of(context).go('/wordPack/play', extra: e.id)
+                      onTapped: () => GoRouter.of(context).go('/play', extra: e.id)
                     ))
                   ],
                 );
