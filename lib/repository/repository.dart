@@ -115,6 +115,22 @@ class Repository {
     }
   }
 
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message);
+    }
+  }
+
+  Future<void> changePassword({required String password}) async {
+    try {
+      await FirebaseAuth.instance.currentUser?.updatePassword(password);
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message);
+    }
+  }
+
   Future<void> logout() => FirebaseAuth.instance.signOut();
 
   Future<void> sendErrorReport({required String message, required String packId}) async {

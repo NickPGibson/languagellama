@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/account_settings/account_settings_ui.dart';
+import 'package:languagellama/pages/change_password/change_password_ui.dart';
 import 'package:languagellama/pages/create_account/create_account_ui.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/init/init_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:languagellama/pages/init/init_ui.dart';
 import 'package:languagellama/pages/login/login_ui.dart';
 import 'package:languagellama/pages/match/game_summary.dart';
 import 'package:languagellama/pages/match/match.dart';
+import 'package:languagellama/pages/reset_password/reset_password_ui.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/transition.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +41,7 @@ class LanguageLlamaApp extends StatelessWidget {
     redirect: (context, state) {
       final path = state.location;
       final userIsLoggedIn = context.read<Repository>().getUser() != null;
-      final loggedOutPages = {"/login", "/createAccount"};
+      final loggedOutPages = {"/login", "/createAccount", "/reset_password"};
       final pageRequiresAuth = !loggedOutPages.contains(path);
       if (path != "/" && (userIsLoggedIn ^ pageRequiresAuth)) {
         return "/";
@@ -84,6 +86,20 @@ class LanguageLlamaApp extends StatelessWidget {
             path: 'settings',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const AccountSettingsUi(),
+              color: Colors.deepPurple,
+            )
+          ),
+          GoRoute(
+            path: 'reset_password',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: const ResetPasswordUi(),
+              color: Colors.deepPurple,
+            )
+          ),
+          GoRoute(
+            path: 'change_password',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: const ChangePasswordUi(),
               color: Colors.deepPurple,
             )
           ),

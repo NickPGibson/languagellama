@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/login/login_bloc.dart';
 import 'package:languagellama/pages/login/login_event.dart';
 import 'package:languagellama/pages/login/login_state.dart';
@@ -36,9 +37,21 @@ class LoginUi extends StatelessWidget {
                 if (state is LoginStateLoading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is LoginStateReady) {
-                  return EmailPassword(
-                    buttonText: 'Login',
-                    onComplete: (email, password) => BlocProvider.of<LoginBloc>(context).add(DoLogin(email: email, password: password)),
+                  return Column(
+                    children: [
+                      EmailPassword(
+                        buttonText: 'Login',
+                        onComplete: (email, password) => BlocProvider.of<LoginBloc>(context).add(DoLogin(email: email, password: password)),
+                      ),
+                      const SizedBox(height: 20,),
+                      TextButton(
+                        onPressed: () => GoRouter.of(context).go('/reset_password'),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Forgot Password?'),
+                      ),
+                    ],
                   );
                 } else {
                   return const SizedBox.shrink();

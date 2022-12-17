@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/account_settings/account_settings_bloc.dart';
 import 'package:languagellama/pages/account_settings/account_settings_event.dart';
 import 'package:languagellama/pages/account_settings/account_settings_state.dart';
@@ -36,6 +37,15 @@ class AccountSettingsUi extends StatelessWidget {
               children: [
                 RoundedCard(
                   child: const ListTile(
+                    leading: Icon(Icons.password_outlined),
+                    title: Text("Change Password"),
+                  ),
+                  onTapped: () {
+                    GoRouter.of(context).go('/change_password');
+                  }
+                ),
+                RoundedCard(
+                  child: const ListTile(
                     leading: Icon(Icons.delete_outline_outlined),
                     title: Text("Delete Account"),
                   ),
@@ -63,7 +73,7 @@ class AccountSettingsUi extends StatelessWidget {
                       )
                     );
                   }
-                )
+                ),
               ],
             )
           ),
