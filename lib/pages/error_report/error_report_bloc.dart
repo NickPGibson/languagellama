@@ -13,8 +13,12 @@ class ErrorReportBloc extends Bloc<ErrorReportEvent, ErrorReportState> {
     on<ErrorReportEvent>((event, emit) async {
       if (event is SendErrorReport) {
         emit(ErrorReportStateLoading());
-        await _repository.sendErrorReport(message: event.message, packId: event.packId);
-        emit(const ErrorReportStateReady("Thank you for helping to improve LanguageLlama!"));
+        try {
+          await _repository.sendErrorReport(message: event.message, packId: event.packId);
+          emit(const ErrorReportStateReady("Thank you for helping to improve LanguageLlama!"));
+        } on Exception {
+          emit(const ErrorReportStateReady("An error occurred."));
+        }
       }
     });
   }

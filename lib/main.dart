@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:languagellama/pages/account_settings/account_settings_ui.dart';
 import 'package:languagellama/pages/change_password/change_password_ui.dart';
+import 'package:languagellama/pages/contact_us/contact_us_ui.dart';
 import 'package:languagellama/pages/create_account/create_account_ui.dart';
 import 'package:languagellama/pages/game_finished/game_finished_ui.dart';
 import 'package:languagellama/pages/init/init_bloc.dart';
@@ -100,6 +101,13 @@ class LanguageLlamaApp extends StatelessWidget {
             path: 'change_password',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const ChangePasswordUi(),
+              color: Colors.deepPurple,
+            )
+          ),
+          GoRoute(
+            path: 'contact_us',
+            pageBuilder: (context, state) => buildMyTransition<void>(
+              child: const ContactUsUi(),
               color: Colors.deepPurple,
             )
           ),

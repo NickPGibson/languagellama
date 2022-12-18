@@ -8,7 +8,7 @@ class ContactForm extends StatefulWidget {
 
   const ContactForm({required this.onSend, Key? key}) : super(key: key);
 
-  final void Function(String) onSend;
+  final void Function(String message) onSend;
 
   @override
   State<ContactForm> createState() => _ContactFormState();

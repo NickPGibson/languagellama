@@ -140,11 +140,25 @@ class Repository {
     }
     final uuid = const Uuid().v4();
     final ref = FirebaseDatabase.instance.ref("error_report/$uuid");
-    ref.update({
+    return ref.update({
       'message': message,
       'user_id': user.uid,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
       'pack_id': packId,
+    });
+  }
+
+  Future<void> sendContactMessage({required String message}) async {
+    final user = _getFirebaseUser();
+    if (user == null) {
+      throw ServerException('User not logged in');
+    }
+    final uuid = const Uuid().v4();
+    final ref = FirebaseDatabase.instance.ref("contact_message/$uuid");
+    return ref.update({
+      'message': message,
+      'user_id': user.uid,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
     });
   }
 
