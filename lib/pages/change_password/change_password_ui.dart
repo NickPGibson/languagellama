@@ -6,6 +6,7 @@ import 'package:languagellama/pages/change_password/change_password_bloc.dart';
 import 'package:languagellama/pages/change_password/change_password_event.dart';
 import 'package:languagellama/pages/change_password/change_password_state.dart';
 import 'package:languagellama/repository/repository.dart';
+import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
 
@@ -37,9 +38,7 @@ class ChangePasswordUi extends StatelessWidget {
                     children: [
                       TextFormField(
                         controller: textController,
-                        decoration: const InputDecoration(
-                          labelText: 'New Password',
-                        ),
+                        decoration: getInputDecoration(label: "New Password"),
                         obscureText: true,
                       ),
                       const SizedBox(height: 20,),

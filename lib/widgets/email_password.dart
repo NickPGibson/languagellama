@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/standard_button.dart';
 
 class EmailPassword extends StatefulWidget {
@@ -30,7 +31,7 @@ class _EmailPasswordState extends State<EmailPassword> {
         TextFormField(
           controller: _emailController,
           textInputAction: TextInputAction.next,
-          decoration: _inputDecoration("Email Address"),
+          decoration: getInputDecoration(label: "Email Address"),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (email) => email != null && !EmailValidator.validate(email) ? "Enter a valid email address" : null,
           style: const TextStyle(color: Colors.black), // text colour
@@ -38,8 +39,8 @@ class _EmailPasswordState extends State<EmailPassword> {
         const SizedBox(height: 10,),
         TextFormField(
           controller: _passwordController,
-          textInputAction: TextInputAction.next,
-          decoration: _inputDecoration("Password"),
+          textInputAction: TextInputAction.done,
+          decoration: getInputDecoration(label: "Password"),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: true,
           validator: widget.passwordValidator,
@@ -51,22 +52,6 @@ class _EmailPasswordState extends State<EmailPassword> {
           title: widget.buttonText,
         )
       ]
-    ),
-  );
-
-  static InputDecoration _inputDecoration(String label) => InputDecoration(
-    labelText: label,
-    labelStyle: const TextStyle(color: Colors.black),
-    floatingLabelStyle:const TextStyle(color: Colors.black,),
-    border: const OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.black
-      )
-    ),
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.black
-      )
     ),
   );
 }

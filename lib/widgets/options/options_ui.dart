@@ -48,15 +48,10 @@ class OptionsUi extends StatelessWidget {
                       },
                     ),
                     ListTile(
-                      leading: const Icon(Icons.favorite_border_outlined),
-                      title: const Text('About The App'),
-                      onTap: () {
-                      },
-                    ),
-                    ListTile(
                       leading: const Icon(Icons.email_outlined),
                       title: const Text('Contact Us'),
                       onTap: () {
+                        GoRouter.of(context).go('/contact_us');
                       },
                     ),
                     ListTile(

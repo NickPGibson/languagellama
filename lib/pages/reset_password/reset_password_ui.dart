@@ -6,6 +6,7 @@ import 'package:languagellama/pages/reset_password/reset_password_bloc.dart';
 import 'package:languagellama/pages/reset_password/reset_password_event.dart';
 import 'package:languagellama/pages/reset_password/reset_password_state.dart';
 import 'package:languagellama/repository/repository.dart';
+import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
 
@@ -39,9 +40,7 @@ class ResetPasswordUi extends StatelessWidget {
                         children: [
                           TextFormField(
                             controller: textController,
-                            decoration: const InputDecoration(
-                              labelText: 'Email',
-                            ),
+                            decoration: getInputDecoration(label: "Email"),
                           ),
                           const SizedBox(height: 20,),
                           StandardButton(
