@@ -74,7 +74,8 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
       }
 
       if (event is DoWordRefill) {
-        _getNextPair(1);
+        _getNextPair();
+        _getNextPair(); // generate up to 2 pairs at once to make it more challenging
       }
 
       if (event is Pause) {
@@ -132,7 +133,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     _incorrectTargetIndex = null;
   }
 
-  void _getNextPair(int minimumEmptySpots) {
+  void _getNextPair() {
     final emptyNativeSpots = <int?>[];
     _nativeWords.forEachIndexed((index, element) {
       if (element == null) {
@@ -140,7 +141,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
       }
     });
 
-    if (emptyNativeSpots.length >= minimumEmptySpots) {
+    if (emptyNativeSpots.isNotEmpty) {
       final nextNativeWord = _answers.keys.sample(1);
       final nextTargetWord = nextNativeWord.map((e) => _answers[e].sample(1).single).toList()..shuffle();
 
