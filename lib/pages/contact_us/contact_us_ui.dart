@@ -7,6 +7,7 @@ import 'package:languagellama/pages/contact_us/contact_us_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/contact_form.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactUsUi extends StatelessWidget {
   const ContactUsUi({Key? key}) : super(key: key);
@@ -24,10 +25,10 @@ class ContactUsUi extends StatelessWidget {
         child: BlocBuilder<ContactUsBloc, ContactUsState>(
           builder: (context, state) {
             return LlamaMenuWidget(
-              appBar: AppBar(title: const Text("Contact Us"),),
+              appBar: AppBar(title: Text(AppLocalizations.of(context)!.contactUs),),
               child: Column(
                 children: [
-                  Text("Please use the box below to send us a message. We will reply by email.", style: Theme.of(context).textTheme.subtitle1,),
+                  Text(AppLocalizations.of(context)!.pleaseUseTheBoxBelow, style: Theme.of(context).textTheme.subtitle1,),
                   const SizedBox(height: 5,),
                   ContactForm(
                     onSend: (message) {

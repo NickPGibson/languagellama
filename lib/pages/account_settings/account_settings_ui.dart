@@ -9,6 +9,7 @@ import 'package:languagellama/pages/account_settings/account_settings_state.dart
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/rounded_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountSettingsUi extends StatelessWidget {
   const AccountSettingsUi({Key? key}) : super(key: key);
@@ -30,40 +31,40 @@ class AccountSettingsUi extends StatelessWidget {
           },
           child: LlamaMenuWidget(
             appBar: AppBar(
-              title: const Text('Settings'),
+              title: Text(AppLocalizations.of(context)!.settings),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 RoundedCard(
-                  child: const ListTile(
-                    leading: Icon(Icons.password_outlined),
-                    title: Text("Change Password"),
+                  child: ListTile(
+                    leading: const Icon(Icons.password_outlined),
+                    title: Text(AppLocalizations.of(context)!.changePassword),
                   ),
                   onTapped: () {
-                    GoRouter.of(context).go('/change_password');
+                    GoRouter.of(context).go('/settings/change_password');
                   }
                 ),
                 RoundedCard(
-                  child: const ListTile(
-                    leading: Icon(Icons.delete_outline_outlined),
-                    title: Text("Delete Account"),
+                  child: ListTile(
+                    leading: const Icon(Icons.delete_outline_outlined),
+                    title: Text(AppLocalizations.of(context)!.deleteAccount),
                   ),
                   onTapped: () {
                     showDialog(
                       context: builderContext,
                       builder: (context) => AlertDialog(
-                        title: const Text("Are you sure?"),
-                        content: const SingleChildScrollView(
-                          child: Text("Your account will be deleted permanently. This cannot be undone."),
+                        title: Text(AppLocalizations.of(context)!.areYouSure),
+                        content: SingleChildScrollView(
+                          child: Text(AppLocalizations.of(context)!.accountWilBeDeleted),
                         ),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text("Cancel"),
+                            child: Text(AppLocalizations.of(context)!.cancel),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           TextButton(
-                            child: const Text("Delete Account"),
+                            child: Text(AppLocalizations.of(context)!.deleteAccount),
                             onPressed: () {
                               BlocProvider.of<AccountSettingsBloc>(builderContext).add(const DeleteAccountPressed());
                               Navigator.of(context).pop();

@@ -8,6 +8,7 @@ import 'package:languagellama/pages/create_account/create_account_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/email_password.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateAccountUi extends StatefulWidget {
   const CreateAccountUi({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _CreateAccountUiState extends State<CreateAccountUi> {
     const minPasswordLength = 8;
     return LlamaMenuWidget(
       appBar: AppBar(
-        title: const Text("Create Account"),
+        title: Text(AppLocalizations.of(context)!.createAccount),
       ),
       child: BlocProvider(
         create: (context) => CreateAccountBloc(context.read<Repository>()),
@@ -42,7 +43,7 @@ class _CreateAccountUiState extends State<CreateAccountUi> {
                 builder: (context, state) {
                   if (state is CreateAccountStateReady) {
                     return EmailPassword(
-                      buttonText: 'Create Account',
+                      buttonText: AppLocalizations.of(context)!.createAccount,
                       passwordValidator: (email) => email != null && email.length < minPasswordLength ? "Password must be at least $minPasswordLength characters" : null,
                       onComplete: (email, password) =>
                           BlocProvider.of<CreateAccountBloc>(context)

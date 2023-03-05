@@ -4,6 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailPassword extends StatefulWidget {
   
@@ -31,7 +32,7 @@ class _EmailPasswordState extends State<EmailPassword> {
         TextFormField(
           controller: _emailController,
           textInputAction: TextInputAction.next,
-          decoration: getInputDecoration(label: "Email Address"),
+          decoration: getInputDecoration(label: AppLocalizations.of(context)!.emailAddress),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (email) => email != null && !EmailValidator.validate(email) ? "Enter a valid email address" : null,
           style: const TextStyle(color: Colors.black), // text colour
@@ -40,7 +41,7 @@ class _EmailPasswordState extends State<EmailPassword> {
         TextFormField(
           controller: _passwordController,
           textInputAction: TextInputAction.done,
-          decoration: getInputDecoration(label: "Password"),
+          decoration: getInputDecoration(label: AppLocalizations.of(context)!.password),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: true,
           validator: widget.passwordValidator,

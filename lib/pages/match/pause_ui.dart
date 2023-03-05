@@ -29,7 +29,7 @@ class PauseUi extends StatelessWidget {
             }),
             const SizedBox(height: 20,),
             StandardButton(
-              title: "Report error",
+              title: AppLocalizations.of(context)!.reportError,
               onPressed: () async {
                 await Navigator.push(
                   context,

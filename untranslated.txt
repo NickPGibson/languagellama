@@ -1,0 +1,27 @@
+{
+  "es": [
+    "settings",
+    "changePassword",
+    "deleteAccount",
+    "newPassword",
+    "forgotPassword",
+    "areYouSure",
+    "accountWilBeDeleted",
+    "cancel",
+    "contactUs",
+    "send",
+    "pleaseUseTheBoxBelow",
+    "enterYourMessageHere",
+    "thanksForMessage",
+    "anErrorOccurred",
+    "signOut",
+    "reportError",
+    "pleaseDescribeTheError",
+    "thanksForHelpingToImprove",
+    "login",
+    "createAccount",
+    "emailAddress",
+    "password",
+    "resetPassword"
+  ]
+}

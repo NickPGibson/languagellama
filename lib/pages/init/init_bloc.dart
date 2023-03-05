@@ -15,6 +15,7 @@ class InitBloc extends Bloc<InitEvent, InitState> {
   InitBloc(this._repository) : super(InitStateInitial()) {
     on<InitEvent>((event, emit) async {
       if (event is StartApp) {
+        _repository.setLanguageCode();
         final authStream = _repository.getAuthStateStream();
         _authSubscription = authStream.listen((user) {
           if (user != null) {
