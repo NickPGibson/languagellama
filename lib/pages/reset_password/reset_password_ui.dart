@@ -9,6 +9,7 @@ import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetPasswordUi extends StatelessWidget {
   const ResetPasswordUi({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class ResetPasswordUi extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return LlamaMenuWidget(
-            appBar: AppBar(title: const Text("Reset Password"),),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.resetPassword),),
             child: BlocListener<ResetPasswordBloc, ResetPasswordState>(
               listener: (context, state) {
                 if (state is ResetPasswordStateReady && state.message != null) {
@@ -40,14 +41,14 @@ class ResetPasswordUi extends StatelessWidget {
                         children: [
                           TextFormField(
                             controller: textController,
-                            decoration: getInputDecoration(label: "Email"),
+                            decoration: getInputDecoration(label: AppLocalizations.of(context)!.emailAddress),
                           ),
                           const SizedBox(height: 20,),
                           StandardButton(
                             onPressed: () {
                               BlocProvider.of<ResetPasswordBloc>(context).add(ResetPassword(textController.text));
                             },
-                            title: 'Reset Password',
+                            title: AppLocalizations.of(context)!.resetPassword,
                           ),
                         ],
                       ),

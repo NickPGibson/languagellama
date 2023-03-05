@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactForm extends StatefulWidget {
 
@@ -26,7 +27,7 @@ class _ContactFormState extends State<ContactForm> {
           TextFormField(
             minLines: 10,
             maxLines: 10,
-            decoration: getInputDecoration(hintText: "Enter your message here"),
+            decoration: getInputDecoration(hintText: AppLocalizations.of(context)!.enterYourMessageHere),
             controller: _textController,
           ),
           const SizedBox(height: 20,),
@@ -35,7 +36,7 @@ class _ContactFormState extends State<ContactForm> {
               widget.onSend(_textController.text);
               Navigator.of(context).pop();
             },
-            title: "Send",
+            title: AppLocalizations.of(context)!.send,
           )
         ],
       ),

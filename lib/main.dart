@@ -88,19 +88,21 @@ class LanguageLlamaApp extends StatelessWidget {
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const AccountSettingsUi(),
               color: Colors.deepPurple,
-            )
+            ),
+            routes: [
+              GoRoute(
+                  path: 'change_password',
+                  pageBuilder: (context, state) => buildMyTransition<void>(
+                    child: const ChangePasswordUi(),
+                    color: Colors.deepPurple,
+                  )
+              ),
+            ]
           ),
           GoRoute(
             path: 'reset_password',
             pageBuilder: (context, state) => buildMyTransition<void>(
               child: const ResetPasswordUi(),
-              color: Colors.deepPurple,
-            )
-          ),
-          GoRoute(
-            path: 'change_password',
-            pageBuilder: (context, state) => buildMyTransition<void>(
-              child: const ChangePasswordUi(),
               color: Colors.deepPurple,
             )
           ),

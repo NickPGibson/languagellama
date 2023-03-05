@@ -9,6 +9,7 @@ import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/input_decoration.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
 import 'package:languagellama/widgets/standard_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordUi extends StatelessWidget {
   const ChangePasswordUi({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class ChangePasswordUi extends StatelessWidget {
     create: (context) => ChangePasswordBloc(context.read<Repository>()),
     child: Builder(
       builder: (context) => LlamaMenuWidget(
-        appBar: AppBar(title: const Text("Reset Password"),),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.changePassword),),
         child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
           listener: (context, state) {
             if (state is ChangePasswordStateReady && state.message != null) {
@@ -38,7 +39,7 @@ class ChangePasswordUi extends StatelessWidget {
                     children: [
                       TextFormField(
                         controller: textController,
-                        decoration: getInputDecoration(label: "New Password"),
+                        decoration: getInputDecoration(label: AppLocalizations.of(context)!.newPassword),
                         obscureText: true,
                       ),
                       const SizedBox(height: 20,),
@@ -46,7 +47,7 @@ class ChangePasswordUi extends StatelessWidget {
                         onPressed: () {
                           BlocProvider.of<ChangePasswordBloc>(context).add(ChangePassword(textController.text));
                         },
-                        title: 'Reset Password',
+                        title: AppLocalizations.of(context)!.changePassword,
                       ),
                     ],
                   ),

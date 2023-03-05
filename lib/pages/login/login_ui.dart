@@ -9,6 +9,7 @@ import 'package:languagellama/pages/login/login_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/email_password.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginUi extends StatelessWidget {
   const LoginUi({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class LoginUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return LlamaMenuWidget(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(AppLocalizations.of(context)!.login),
       ),
       child: BlocProvider(
         create: (context) => LoginBloc(context.read<Repository>()),
@@ -40,7 +41,7 @@ class LoginUi extends StatelessWidget {
                   return Column(
                     children: [
                       EmailPassword(
-                        buttonText: 'Login',
+                        buttonText: AppLocalizations.of(context)!.login,
                         onComplete: (email, password) => BlocProvider.of<LoginBloc>(context).add(DoLogin(email: email, password: password)),
                       ),
                       const SizedBox(height: 20,),
@@ -49,7 +50,7 @@ class LoginUi extends StatelessWidget {
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.white,
                         ),
-                        child: const Text('Forgot Password?'),
+                        child: Text(AppLocalizations.of(context)!.forgotPassword),
                       ),
                     ],
                   );

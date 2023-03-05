@@ -95,8 +95,14 @@ class Repository {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
+      // todo check code and define custom localised messages for each code instead of passing message which isn't localised
+      //  https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/createUserWithEmailAndPassword.html
       throw ServerException(e.message);
     }
+  }
+
+  Future<void> setLanguageCode() {
+    return FirebaseAuth.instance.setLanguageCode(null);
   }
 
   Future<void> deleteAccount() async {

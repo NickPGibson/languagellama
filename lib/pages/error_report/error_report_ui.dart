@@ -7,6 +7,7 @@ import 'package:languagellama/pages/error_report/error_report_state.dart';
 import 'package:languagellama/repository/repository.dart';
 import 'package:languagellama/widgets/contact_form.dart';
 import 'package:languagellama/widgets/llama_menu_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ErrorReportUi extends StatelessWidget {
 
@@ -30,12 +31,12 @@ class ErrorReportUi extends StatelessWidget {
               if (state is ErrorReportStateReady) {
                 return LlamaMenuWidget(
                   appBar: AppBar(
-                    title: const Text("Report error"),
+                    title: Text(AppLocalizations.of(context)!.reportError),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Please describe the error you encountered.", style: Theme.of(context).textTheme.subtitle1,),
+                      Text(AppLocalizations.of(context)!.pleaseDescribeTheError, style: Theme.of(context).textTheme.subtitle1,),
                       const SizedBox(height: 5,),
                       ContactForm(
                         onSend: (text) {

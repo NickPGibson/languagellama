@@ -8,6 +8,7 @@ import 'package:languagellama/widgets/box_decoration.dart';
 import 'package:languagellama/widgets/options/options_bloc.dart';
 import 'package:languagellama/widgets/options/options_event.dart';
 import 'package:languagellama/widgets/options/options_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OptionsUi extends StatelessWidget {
   const OptionsUi({Key? key}) : super(key: key);
@@ -42,21 +43,21 @@ class OptionsUi extends StatelessWidget {
                     ),
                     ListTile(
                       leading: const Icon(Icons.settings_outlined),
-                      title: const Text('Settings'),
+                      title: Text(AppLocalizations.of(context)!.settings),
                       onTap: () {
                         GoRouter.of(context).go('/settings');
                       },
                     ),
                     ListTile(
                       leading: const Icon(Icons.email_outlined),
-                      title: const Text('Contact Us'),
+                      title: Text(AppLocalizations.of(context)!.contactUs),
                       onTap: () {
                         GoRouter.of(context).go('/contact_us');
                       },
                     ),
                     ListTile(
                       leading: const Icon(Icons.logout_outlined),
-                      title: const Text('Sign Out'),
+                      title: Text(AppLocalizations.of(context)!.signOut),
                       onTap: () {
                         BlocProvider.of<OptionsBloc>(context).add(SignOut());
                         Navigator.pop(context);

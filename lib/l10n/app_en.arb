@@ -39,6 +39,75 @@
     },
     "exit": "Exit",
     "@exit": {
+    },
+    "settings": "Settings",
+    "@settings": {
+    },
+    "changePassword": "Change Password",
+    "@changePassword": {
+    },
+    "deleteAccount": "Delete Account",
+    "@deleteAccount": {
+    },
+    "newPassword": "New Password",
+    "@newPassword": {
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+    },
+    "areYouSure": "Are you sure?",
+    "@areYouSure": {
+    },
+    "accountWilBeDeleted": "Your account will be deleted permanently. This cannot be undone.",
+    "@accountWilBeDeleted": {
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+    },
+    "contactUs": "Contact Us",
+    "@contactUs": {
+    },
+    "send": "Send",
+    "@send": {
+    },
+    "pleaseUseTheBoxBelow": "Please use the box below to send us a message. We will reply by email.",
+    "@pleaseUseTheBoxBelow": {
+    },
+    "enterYourMessageHere": "Enter your message here",
+    "@enterYourMessageHere": {
+    },
+    "thanksForMessage": "Thank you for your message!",
+    "@thanksForMessage": {
+    },
+    "anErrorOccurred": "An error occurred.",
+    "@anErrorOccurred": {
+    },
+    "signOut": "Sign Out",
+    "@signOut": {
+    },
+    "reportError": "Report error",
+    "@reportError": {
+    },
+    "pleaseDescribeTheError": "Please describe the error you encountered.",
+    "@pleaseDescribeTheError": {
+    },
+    "thanksForHelpingToImprove": "Thank you for helping to improve LanguageLlama!",
+    "@thanksForHelpingToImprove": {
+    },
+    "login": "Login",
+    "@login": {
+    },
+    "createAccount": "Create Account",
+    "@createAccount": {
+    },
+    "emailAddress": "Email Address",
+    "@emailAddress": {
+    },
+    "password": "Password",
+    "@password": {
+    },
+    "resetPassword": "Reset Password",
+    "@resetPassword": {
     }
 }
 
