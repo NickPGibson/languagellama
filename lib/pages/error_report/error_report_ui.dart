@@ -36,7 +36,7 @@ class ErrorReportUi extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(context)!.pleaseDescribeTheError, style: Theme.of(context).textTheme.subtitle1,),
+                      Text(AppLocalizations.of(context)!.pleaseDescribeTheError, style: Theme.of(context).textTheme.titleMedium,),
                       const SizedBox(height: 5,),
                       ContactForm(
                         onSend: (text) {

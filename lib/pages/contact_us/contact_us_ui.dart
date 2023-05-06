@@ -28,7 +28,7 @@ class ContactUsUi extends StatelessWidget {
               appBar: AppBar(title: Text(AppLocalizations.of(context)!.contactUs),),
               child: Column(
                 children: [
-                  Text(AppLocalizations.of(context)!.pleaseUseTheBoxBelow, style: Theme.of(context).textTheme.subtitle1,),
+                  Text(AppLocalizations.of(context)!.pleaseUseTheBoxBelow, style: Theme.of(context).textTheme.titleMedium,),
                   const SizedBox(height: 5,),
                   ContactForm(
                     onSend: (message) {

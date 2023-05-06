@@ -21,7 +21,7 @@ class PauseUi extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocalizations.of(context)!.paused, style: Theme.of(context).textTheme.headline5,),
+            Text(AppLocalizations.of(context)!.paused, style: Theme.of(context).textTheme.headlineSmall,),
             const SizedBox(height: 20,),
             StandardButton(title: AppLocalizations.of(context)!.resume, onPressed: () {
               onResume();
