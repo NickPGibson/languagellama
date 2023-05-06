@@ -93,7 +93,7 @@ class Repository {
 
   Future<void> createAccount({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _formatUsername(email), password: password);
     } on FirebaseAuthException catch (e) {
       // todo check code and define custom localised messages for each code instead of passing message which isn't localised
       //  https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/createUserWithEmailAndPassword.html
@@ -115,7 +115,7 @@ class Repository {
 
   Future<void> login({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: _formatUsername(email), password: password);
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message);
     }
@@ -123,7 +123,7 @@ class Repository {
 
   Future<void> resetPassword({required String email}) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _formatUsername(email));
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message);
     }
@@ -181,6 +181,8 @@ class Repository {
       return AuthUser(username: user.email);
     }
   }
+
+  String _formatUsername(String email) => email.trim();
 }
 
 enum LanguagePair {
