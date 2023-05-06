@@ -30,12 +30,12 @@ class GameFinishedUi extends StatelessWidget {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.score(summary.score),
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 30,),
                   Text(
                     AppLocalizations.of(context)!.highScore(state.highScore),
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 30,),
                   StandardButton(

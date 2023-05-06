@@ -21,7 +21,7 @@ class _CreateAccountUiState extends State<CreateAccountUi> {
 
   @override
   Widget build(BuildContext context) {
-    const minPasswordLength = 8;
+    const minPasswordLength = 6;
     return LlamaMenuWidget(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.createAccount),

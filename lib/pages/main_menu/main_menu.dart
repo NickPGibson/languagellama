@@ -13,7 +13,7 @@ class MainMenu extends StatelessWidget {
       children: [
         Text(
           AppLocalizations.of(context)!.welcomeToLanguageLLama,
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 30,),
         const CircleAvatar(backgroundImage: AssetImage('assets/llama.png'), radius: 80),

@@ -36,7 +36,7 @@ class OptionsUi extends StatelessWidget {
                           const SizedBox(height: 10),
                           if (state.currentUser != null) Text(
                             state.currentUser!,
-                            style: Theme.of(context).textTheme.subtitle1?.copyWith(color: Colors.white),
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
                           ),
                         ],
                       ),
