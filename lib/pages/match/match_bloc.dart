@@ -27,8 +27,10 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
   int? _incorrectNativeIndex;
   int? _incorrectTargetIndex;
 
-  final _nativeWords = List<String?>.filled(4, null, growable: false);
-  final _targetWords = List<String?>.filled(4, null, growable: false);
+  static const numWordPairs = 5;
+
+  final _nativeWords = List<String?>.filled(numWordPairs, null, growable: false);
+  final _targetWords = List<String?>.filled(numWordPairs, null, growable: false);
 
   StreamSubscription<int>? _timerSubscription;
   StreamSubscription? _wordRefillTimerSubscription;
@@ -42,7 +44,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
           _answers.add(key, value);
         });
 
-        final initialNativeWords = _answers.keys.sample(4);
+        final initialNativeWords = _answers.keys.sample(numWordPairs);
         final initialTargetWords = initialNativeWords.map((e) => _answers[e].sample(1).single).toList()..shuffle();
 
         _nativeWords.setAll(0, initialNativeWords);

@@ -47,7 +47,7 @@ class MatchUi extends StatelessWidget {
                       Expanded(
                         child: LayoutBuilder( // use AspectRatio and grid view? https://www.youtube.com/watch?v=G1l8U8DTkvk
                           builder: (context, constraints) {
-                            const numRows = 4;
+                            const numRows = MatchBloc.numWordPairs;
                             const numColumns = 2;
                             final smallestSide = min(constraints.maxHeight / numRows, constraints.maxWidth / numColumns);
                             return Column(
