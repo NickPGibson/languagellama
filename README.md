@@ -8,8 +8,8 @@ https://github.com/user-attachments/assets/ea1bfb21-10b1-4943-b9fb-fae5d2b7f85a
 
 ## About Language LLama
 
-Language Llama is an app written in Flutter, a cross-platform app framework that enables apps to be developed using a single codebase for multiple platforms. Language LLama uses Firebase to manage user authentication and storage.
-Language LLama is supported on iOS, android and the web.
+Language Llama is an app written in Flutter, a cross-platform app framework that enables apps to be developed using a single codebase for multiple platforms. Language Llama uses Firebase to manage user authentication and storage.
+Language Llama is supported on iOS, android and the web.
 
 ### Features
 * An interactive word matching game to help you learn vocabulary in English and Spanish
