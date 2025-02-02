@@ -17,7 +17,7 @@ class Repository {
     }
     try {
       final ref = FirebaseDatabase.instance.ref("pack_user_data/${user.uid}/$packId");
-      final snapshot = await ref.get();
+      final snapshot = (await ref.once()).snapshot;
       final v = snapshot.value;
       return v == null ? null : PackUserData.fromJson(Map<String, dynamic>.from(v as Map<dynamic, dynamic>));
     } catch (e) {
